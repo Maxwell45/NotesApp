@@ -11,14 +11,6 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="9c11d" class="javax.swing.JList" binding="noteList">
-        <constraints border-constraint="Center"/>
-        <properties>
-          <maximumSize width="250" height="400"/>
-          <minimumSize width="250" height="400"/>
-          <preferredSize width="250" height="400"/>
-        </properties>
-      </component>
       <grid id="512aa" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="South"/>
@@ -57,6 +49,24 @@
           <text value="Notes"/>
         </properties>
       </component>
+      <scrollpane id="cfb9a">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <autoscrolls value="true"/>
+          <horizontalScrollBarPolicy value="31"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="9c11d" class="javax.swing.JList" binding="noteList">
+            <constraints/>
+            <properties>
+              <maximumSize width="250" height="400"/>
+              <minimumSize width="250" height="400"/>
+              <preferredSize width="250" height="400"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

@@ -11,14 +11,6 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="94285" class="javax.swing.JTextArea" binding="noteText">
-        <constraints border-constraint="Center"/>
-        <properties>
-          <lineWrap value="true"/>
-          <name value="noteText"/>
-          <wrapStyleWord value="true"/>
-        </properties>
-      </component>
       <component id="8b593" class="javax.swing.JButton" binding="submitButton" default-binding="true">
         <constraints border-constraint="South"/>
         <properties>
@@ -33,6 +25,24 @@
           <text value="Label"/>
         </properties>
       </component>
+      <scrollpane id="d5b94">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <autoscrolls value="false"/>
+          <horizontalScrollBarPolicy value="31"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="94285" class="javax.swing.JTextArea" binding="noteText">
+            <constraints/>
+            <properties>
+              <lineWrap value="true"/>
+              <name value="noteText"/>
+              <wrapStyleWord value="true"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

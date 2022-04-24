@@ -33,6 +33,8 @@ public class NoteTextForm {
                 notesManager.editNoteText(fileName, noteText.getText()); // Changing the file's contents to the contents of a TextArea
             }
         });
+
+
     }
 
     public JPanel getPanel() {
