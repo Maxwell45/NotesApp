@@ -15,14 +15,14 @@ public class NoteTextForm {
     private String fileName;
 
     public NoteTextForm(String fileName, NotesManager notesManager) {
-        panel1.setVisible(true);
         this.notesManager = notesManager;
         this.fileName = fileName;
+
         List<File> fileList = this.notesManager.getFileList();
         noteName.setText(this.fileName);
 
         try {
-            noteText.setText(notesManager.getNoteText(this.fileName));
+            noteText.setText(notesManager.getNoteText(this.fileName)); // Setting the TextArea's text to whatever is written in the file;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -30,7 +30,7 @@ public class NoteTextForm {
         submitButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notesManager.editNoteText(fileName, noteText.getText());
+                notesManager.editNoteText(fileName, noteText.getText()); // Changing the file's contents to the contents of a TextArea
             }
         });
     }

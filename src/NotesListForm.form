@@ -51,6 +51,12 @@
           </component>
         </children>
       </grid>
+      <component id="bbd57" class="javax.swing.JLabel">
+        <constraints border-constraint="North"/>
+        <properties>
+          <text value="Notes"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

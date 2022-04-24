@@ -11,8 +11,8 @@ public class NotesListForm {
     private JButton openButton;
     private JButton deleteButton;
     private JButton newButton;
-    private NotesManager notesManager; //notesManager is being used as a way to interface with the file system.
-    private NotesListForm formReference = this; //Used as a callback to this class from another form in order to update the list and also to close the child form properly
+    private NotesManager notesManager; // notesManager is being used as a way to interface with the file system.
+    private NotesListForm formReference = this; // Used as a callback to this class from another form in order to update the list and also to close the child form properly
 
     private JFrame noteTextForm = new JFrame(); //Containers for the text inside a note
     private JFrame noteNameDialog = new JFrame(); // and for a new note dialogue respectively
@@ -23,17 +23,17 @@ public class NotesListForm {
 
     public NotesListForm() {
         try {
-            notesManager = new NotesManager(); //Initializing notesManager
+            notesManager = new NotesManager(); // Initializing notesManager
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        listUpdate();
+        listUpdate(); // Bringing the list up to date
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (File file : fileList) {
-            listModel.addElement(file.getName());
+            listModel.addElement(file.getName()); // Creating the model, filling it up
         }
-        noteList.setModel(listModel);
+        noteList.setModel(listModel); // and initializing the list in the form
 
         openButton.addActionListener(new AbstractAction() {
             @Override
@@ -43,26 +43,26 @@ public class NotesListForm {
                 noteTextForm.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 noteTextForm.setSize(250, 250);
                 noteTextForm.setLocationRelativeTo(null);
-                noteTextForm.setVisible(true);
+                noteTextForm.setVisible(true); // Preparing the form and opening it
             }
         });
 
         newButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                noteNameDialog.add(new NewNoteNameDialog(notesManager, formReference).getContentPane());
+                noteNameDialog.add(new NewNoteNameDialog(notesManager, formReference).getContentPane()); // Passing the formReference here to make the NewNoteNameDialog able to update this form
                 noteNameDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 noteNameDialog.setSize(300, 150);
                 noteNameDialog.setLocationRelativeTo(null);
-                noteNameDialog.setVisible(true);
+                noteNameDialog.setVisible(true); // Preparing the form and opening it
             }
         });
 
         deleteButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notesManager.removeNote(noteList.getSelectedValue().toString());
-                listUpdate();
+                notesManager.removeNote(noteList.getSelectedValue().toString()); // Removing the file from the list and also deleting the file containing it
+                listUpdate(); // Updating the list
             }
         });
     }
@@ -71,7 +71,7 @@ public class NotesListForm {
         fileList = notesManager.getFileList();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (File file : fileList) {
-            listModel.addElement(file.getName());
+            listModel.addElement(file.getName()); // Updating the list and putting it inside a model
         }
         noteList.setModel(listModel);
     }
@@ -81,7 +81,7 @@ public class NotesListForm {
     }
 
     public void closeDialog() {
-        noteNameDialog.setVisible(false);
+        noteNameDialog.setVisible(false); // Made specifically to make the noteNameDialog close properly
         noteNameDialog.dispose();
     }
 }

@@ -38,7 +38,7 @@ public class IncorrectFormatOfNoteErrorMessage extends JDialog {
 
     private void onOK() {
         parentForm.closeErrorMessage();
-    }
+    } // Asking the parent form to close this
 
     public JPanel getPanel() {
         return contentPane;

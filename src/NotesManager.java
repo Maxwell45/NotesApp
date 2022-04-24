@@ -65,7 +65,7 @@ public class NotesManager {
                 Scanner scanner = new Scanner(file);
                 String content = "";
                 while (scanner.hasNextLine()) {
-                    content = content + scanner.nextLine(); // Getting all the
+                    content = content + scanner.nextLine() + "\n"; // Getting all the lines inside a note
                 }
                 return content;
             }
