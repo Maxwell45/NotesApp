@@ -5,10 +5,11 @@ public class IncorrectFormatOfNoteErrorMessage extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
 
-    private NewNoteNameDialog parentForm;
-
-    public IncorrectFormatOfNoteErrorMessage(NewNoteNameDialog newNoteNameDialog) {
-        this.parentForm = newNoteNameDialog;
+    public IncorrectFormatOfNoteErrorMessage() {
+        this.add(contentPane);
+        this.setSize(500, 150);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
 
         setContentPane(contentPane);
         setModal(true);
@@ -37,10 +38,6 @@ public class IncorrectFormatOfNoteErrorMessage extends JDialog {
     }
 
     private void onOK() {
-        parentForm.closeErrorMessage();
+        this.dispose();
     } // Asking the parent form to close this
-
-    public JPanel getPanel() {
-        return contentPane;
-    }
 }

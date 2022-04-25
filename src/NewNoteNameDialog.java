@@ -11,9 +11,14 @@ public class NewNoteNameDialog extends JDialog {
     private NotesManager notesManager; // References to a notesManager
     private NotesListForm parentForm; // and to the form that called it
 
-    private JFrame errorMessage = new JFrame(); // and an error message that shows up in case if the input is incorrect
+    public NewNoteNameDialog(NotesManager notesManager, NotesListForm parentForm, int offsetX, int offsetY) {
+        this.add(contentPane);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setSize(300, 150);
+        this.setLocationRelativeTo(null);
+        this.setLocation(this.getX() + offsetX, this.getY() + offsetY);
+        this.setVisible(true);
 
-    public NewNoteNameDialog(NotesManager notesManager, NotesListForm parentForm) {
         this.notesManager = notesManager;
         this.parentForm = parentForm;
 
@@ -51,18 +56,12 @@ public class NewNoteNameDialog extends JDialog {
 
     private void onOK() {
         if(!textField1.getText().matches("[\\w ]+")) { // If the entered name doesn't match regex, call an error form
-            errorMessage.add(new IncorrectFormatOfNoteErrorMessage(this).getPanel());
-            errorMessage.setSize(500, 150);
-            errorMessage.setLocationRelativeTo(null);
-            errorMessage.setVisible(true);
+            new IncorrectFormatOfNoteErrorMessage();
             return;
         }
         for (File file : notesManager.getFileList()) { // If a duplicate entry is found, call an error form
             if (textField1.getText().equals(file.getName())) {
-                errorMessage.add(new MatchingNoteNamesErrorMessage(this).getPanel());
-                errorMessage.setSize(500, 150);
-                errorMessage.setLocationRelativeTo(null);
-                errorMessage.setVisible(true);
+                new MatchingNoteNamesErrorMessage();
                 return;
             }
         }
@@ -72,15 +71,10 @@ public class NewNoteNameDialog extends JDialog {
             throw new RuntimeException(e);
         }
         parentForm.listUpdate(); // Update the list
-        onCancel();
+        this.dispose();
     }
 
     private void onCancel() {
-        parentForm.closeDialog();
+        this.dispose();
     } // and then ask the parentForm to close this form properly
-
-    public void closeErrorMessage() {
-        errorMessage.setVisible(false); // This triggers whenever an error message closes to close it properly
-        errorMessage.dispose();
-    }
 }

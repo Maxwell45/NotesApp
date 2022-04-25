@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,18 +15,19 @@ public class NotesListForm {
     private JButton deleteButton;
     private JButton newButton;
     private NotesManager notesManager; // notesManager is being used as a way to interface with the file system.
-    private NotesListForm formReference = this; // Used as a callback to this class from another form in order to update the list and also to close the child form properly
-
-    private JFrame noteTextForm = new JFrame();
+    private NotesListForm formReference = this; // Used as a callback to this class from another form in order to update the list
     private JFrame noteNameDialog = new JFrame(); // and for a new note dialogue respectively
 
     private List<File> fileList;
     private void createUIComponents() {
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        for (File file : fileList) {
-            listModel.addElement(file.getName()); // Creating the model, filling it up
-        }
-        noteList.setModel(listModel); // and initializing the list in the form
+        JFrame frame = new JFrame();
+        frame.add(this.panel1);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(500, 750);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        listUpdate();
 
         openButton.addActionListener(new AbstractAction() {
             @Override
@@ -39,7 +41,7 @@ public class NotesListForm {
         newButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                noteNameDialog = createNoteNameDialog(0, 0);
+                createNoteNameDialog(0, 0);
             }
         });
 
@@ -63,26 +65,12 @@ public class NotesListForm {
         });
     }
 
-    public JFrame createNoteTextForm(String selectedFile, int offsetX, int offsetY) {
-        JFrame frame = new JFrame();
-        frame.add(new NoteTextForm(selectedFile, notesManager).getPanel());
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setSize(500, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setLocation(frame.getX() + offsetX, frame.getY() + offsetY);
-        frame.setVisible(true);
-        return frame;
+    public void createNoteTextForm(String selectedFile, int offsetX, int offsetY) {
+        new NoteTextForm(selectedFile, notesManager, offsetX, offsetY);
     }
 
-    public JFrame createNoteNameDialog(int offsetX, int offsetY) {
-        JFrame frame = new JFrame();
-        frame.add(new NewNoteNameDialog(notesManager, formReference).getContentPane()); // Passing the formReference here to make the NewNoteNameDialog able to update this form
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setSize(300, 150);
-        frame.setLocationRelativeTo(null);
-        frame.setLocation(frame.getX() + offsetX, frame.getY() + offsetY);
-        frame.setVisible(true);
-        return frame;
+    public void createNoteNameDialog(int offsetX, int offsetY) {
+        new NewNoteNameDialog(notesManager, formReference, offsetX, offsetY);
     }
 
     public NotesListForm() {
@@ -91,18 +79,15 @@ public class NotesListForm {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        listUpdate(); // Bringing the list up to date
+        createUIComponents();
 
         for (File file : notesManager.getFileList()) {
             if (file.getName().equals(".firsttime")) {
-                JFrame frame = createNoteTextForm("Добро пожаловать в приложение заметки", 500, 0);
+                createNoteTextForm("Добро пожаловать в приложение заметки", 500, 0);
                 notesManager.removeNote(".firsttime");
-                frame.setVisible(true);
                 listUpdate();
             }
         }
-
-        createUIComponents();
     }
 
     public void listUpdate() {
@@ -112,14 +97,5 @@ public class NotesListForm {
             listModel.addElement(file.getName()); // Updating the list and putting it inside a model
         }
         noteList.setModel(listModel);
-    }
-
-    public JPanel getPanel() {
-        return panel1;
-    }
-
-    public void closeDialog() {
-        noteNameDialog.setVisible(false); // Made specifically to make the noteNameDialog close properly
-        noteNameDialog.dispose();
     }
 }

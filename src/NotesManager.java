@@ -29,7 +29,7 @@ public class NotesManager {
 
     public void addNote(String name) throws IOException {
         FileWriter fileWriter = new FileWriter(directoryPath + "\\" + name); // Creating a new file with a given name
-        fileWriter.write("Write your note here"); // Adding in filler text
+        fileWriter.write("Запишите что-нибудь здесь"); // Adding in filler text
         fileWriter.close();
         fileList.add(new File(directoryPath + "\\" + name)); // Adding the same file to the array
     }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class NoteTextForm {
+    private JFrame frame;
     private JTextArea noteText;
     private JPanel panel1;
     private JButton submitButton;
@@ -14,13 +15,19 @@ public class NoteTextForm {
 
     private String fileName;
 
-    public NoteTextForm(String fileName, NotesManager notesManager) {
+    public NoteTextForm(String fileName, NotesManager notesManager, int offsetX, int offsetY) {
+        frame = new JFrame();
+        frame.add(panel1);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setLocation(frame.getX() + offsetX, frame.getY() + offsetY);
+        frame.setVisible(true);
+
         this.notesManager = notesManager;
         this.fileName = fileName;
 
-        List<File> fileList = this.notesManager.getFileList();
         noteName.setText(this.fileName);
-
         try {
             noteText.setText(notesManager.getNoteText(this.fileName)); // Setting the TextArea's text to whatever is written in the file;
         } catch (IOException e) {
@@ -31,13 +38,8 @@ public class NoteTextForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 notesManager.editNoteText(fileName, noteText.getText()); // Changing the file's contents to the contents of a TextArea
+                frame.dispose();
             }
         });
-
-
-    }
-
-    public JPanel getPanel() {
-        return panel1;
     }
 }
