@@ -53,6 +53,7 @@ public class NewNoteNameDialog extends JDialog {
         if(!textField1.getText().matches("[\\w ]+")) { // If the entered name doesn't match regex, call an error form
             errorMessage.add(new IncorrectFormatOfNoteErrorMessage(this).getPanel());
             errorMessage.setSize(500, 150);
+            errorMessage.setLocationRelativeTo(null);
             errorMessage.setVisible(true);
             return;
         }
@@ -60,6 +61,7 @@ public class NewNoteNameDialog extends JDialog {
             if (textField1.getText().equals(file.getName())) {
                 errorMessage.add(new MatchingNoteNamesErrorMessage(this).getPanel());
                 errorMessage.setSize(500, 150);
+                errorMessage.setLocationRelativeTo(null);
                 errorMessage.setVisible(true);
                 return;
             }

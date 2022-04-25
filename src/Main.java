@@ -5,7 +5,7 @@ public class Main {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(new NotesListForm().getPanel());
-        frame.setSize(250, 300);
+        frame.setSize(500, 750);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
