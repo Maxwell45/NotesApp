@@ -22,7 +22,7 @@ public class IncorrectFormatOfNoteErrorMessage extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
+        // call onOK() when cross is clicked
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -30,7 +30,7 @@ public class IncorrectFormatOfNoteErrorMessage extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
+        // call onOK() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -40,5 +40,5 @@ public class IncorrectFormatOfNoteErrorMessage extends JDialog {
 
     private void onOK() {
         this.dispose();
-    } // Asking the parent form to close this
+    }
 }

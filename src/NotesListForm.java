@@ -38,7 +38,7 @@ public class NotesListForm {
         newButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createNoteNameDialog(0, 0);
+                createNoteNameDialog(0, 0); // Calling a form to create a new note
             }
         });
 
@@ -53,7 +53,7 @@ public class NotesListForm {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(e.getClickCount() >= 2) {
+                if(e.getClickCount() >= 2) { // Double click on an entry support
                     String selectedFile = noteList.getSelectedValue().toString();
                     createNoteTextForm(selectedFile, 0, 0);
                 }
@@ -64,19 +64,19 @@ public class NotesListForm {
             public void actionPerformed(ActionEvent e) {
                 createNoteDeletionConfirmationDialog(noteList.getSelectedValue().toString(), 0,0);
             }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT); // Delete button support
     }
 
     public void createNoteTextForm(String selectedFile, int offsetX, int offsetY) {
-        new NoteTextForm(selectedFile, notesManager, offsetX, offsetY);
+        new NoteTextForm(selectedFile, notesManager, offsetX, offsetY); // A function to create a new text form
     }
 
     public void createNoteNameDialog(int offsetX, int offsetY) {
-        new NewNoteNameDialog(notesManager, formReference, offsetX, offsetY);
+        new NewNoteNameDialog(notesManager, formReference, offsetX, offsetY); // A function to create a new name form
     }
 
     public void createNoteDeletionConfirmationDialog(String selectedFile, int offsetX, int offsetY) {
-        new NoteDeletionConfirmationDialog(selectedFile, notesManager, formReference, offsetX, offsetY);
+        new NoteDeletionConfirmationDialog(selectedFile, notesManager, formReference, offsetX, offsetY); // A function to create a deletion confirmation form
     }
 
     public NotesListForm() {

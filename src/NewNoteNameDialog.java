@@ -39,7 +39,7 @@ public class NewNoteNameDialog extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
+        // call onOK() when cross is clicked
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -47,7 +47,7 @@ public class NewNoteNameDialog extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
+        // call onOK() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -77,5 +77,5 @@ public class NewNoteNameDialog extends JDialog {
 
     private void onCancel() {
         this.dispose();
-    } // and then ask the parentForm to close this form properly
+    }
 }

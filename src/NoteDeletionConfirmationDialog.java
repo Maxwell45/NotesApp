@@ -18,7 +18,7 @@ public class NoteDeletionConfirmationDialog extends JDialog {
         this.setSize(400, 150);
         this.setLocationRelativeTo(null);
         this.setLocation(this.getX() + offsetX, this.getY() + offsetY);
-        this.warning.setText("Вы уверены что вы хотите удалить заметку " + selectedFile + "?");
+        this.warning.setText("Вы уверены что вы хотите удалить заметку " + selectedFile + "?"); // Asking the user if they really want to proceed with the deletion
         this.setVisible(true);
 
         this.selectedFile = selectedFile;
@@ -58,8 +58,8 @@ public class NoteDeletionConfirmationDialog extends JDialog {
     }
 
     private void onOK() {
-        notesManager.removeNote(selectedFile);
-        parentForm.listUpdate();
+        notesManager.removeNote(selectedFile); // Removing the note
+        parentForm.listUpdate(); // And updating the list
         dispose();
     }
 

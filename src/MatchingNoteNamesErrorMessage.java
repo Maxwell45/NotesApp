@@ -40,5 +40,5 @@ public class MatchingNoteNamesErrorMessage extends JDialog {
 
     private void onOK() {
         this.dispose();
-    } // Asking the parent form to close this
+    }
 }
