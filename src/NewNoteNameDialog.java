@@ -8,8 +8,8 @@ public class NewNoteNameDialog extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField textField1;
-    private NotesManager notesManager; // References to a notesManager
-    private NotesListForm parentForm; // and to the form that called it
+    private final NotesManager notesManager; // References to a notesManager
+    private final NotesListForm parentForm; // and to the form that called it
 
     public NewNoteNameDialog(NotesManager notesManager, NotesListForm parentForm, int offsetX, int offsetY) {
         this.add(contentPane);
