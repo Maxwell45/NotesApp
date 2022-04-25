@@ -1,7 +1,5 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +17,7 @@ public class NotesListForm {
     private List<File> fileList;
     private void createUIComponents() {
         JFrame frame = new JFrame();
+        frame.setTitle("Заметки");
         frame.add(this.panel1);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(500, 750);
@@ -46,8 +45,7 @@ public class NotesListForm {
         deleteButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notesManager.removeNote(noteList.getSelectedValue().toString()); // Removing the file from the list and also deleting the file containing it
-                listUpdate(); // Updating the list
+                createNoteDeletionConfirmationDialog(noteList.getSelectedValue().toString(), 0, 0);// Asking the user if they want to proceed
             }
         });
 
@@ -61,6 +59,12 @@ public class NotesListForm {
                 }
             }
         });
+
+        noteList.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                createNoteDeletionConfirmationDialog(noteList.getSelectedValue().toString(), 0,0);
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     public void createNoteTextForm(String selectedFile, int offsetX, int offsetY) {
@@ -69,6 +73,10 @@ public class NotesListForm {
 
     public void createNoteNameDialog(int offsetX, int offsetY) {
         new NewNoteNameDialog(notesManager, formReference, offsetX, offsetY);
+    }
+
+    public void createNoteDeletionConfirmationDialog(String selectedFile, int offsetX, int offsetY) {
+        new NoteDeletionConfirmationDialog(selectedFile, notesManager, formReference, offsetX, offsetY);
     }
 
     public NotesListForm() {
@@ -80,8 +88,8 @@ public class NotesListForm {
         createUIComponents();
 
         for (File file : notesManager.getFileList()) {
-            if (file.getName().equals(".firsttime")) {
-                createNoteTextForm("Добро пожаловать в приложение заметки", 500, 0);
+            if (file.getName().equals(".firsttime")) { // Testing if the application is run the first time or not, if so, open up the first note
+                createNoteTextForm("Добро пожаловать в приложение Заметки", 500, 0);
                 notesManager.removeNote(".firsttime");
                 listUpdate();
             }

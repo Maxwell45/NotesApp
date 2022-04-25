@@ -1,25 +1,27 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 
-public class NewNoteNameDialog extends JDialog {
+public class NoteDeletionConfirmationDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textField1;
-    private final NotesManager notesManager; // References to a notesManager
-    private final NotesListForm parentForm; // and to the form that called it
+    private JLabel warning;
 
-    public NewNoteNameDialog(NotesManager notesManager, NotesListForm parentForm, int offsetX, int offsetY) {
+    private final String selectedFile;
+    private final NotesManager notesManager;
+    private final NotesListForm parentForm;
+
+    public NoteDeletionConfirmationDialog(String selectedFile, NotesManager notesManager, NotesListForm parentForm, int offsetX, int offsetY) {
         this.add(contentPane);
-        this.setTitle("Создать новую заметку");
+        this.setTitle("Удаление заметки");
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.setSize(300, 150);
+        this.setSize(400, 150);
         this.setLocationRelativeTo(null);
         this.setLocation(this.getX() + offsetX, this.getY() + offsetY);
+        this.warning.setText("Вы уверены что вы хотите удалить заметку " + selectedFile + "?");
         this.setVisible(true);
 
+        this.selectedFile = selectedFile;
         this.notesManager = notesManager;
         this.parentForm = parentForm;
 
@@ -56,26 +58,12 @@ public class NewNoteNameDialog extends JDialog {
     }
 
     private void onOK() {
-        if(!textField1.getText().matches("[A-Za-z\\dА-Яа-я- ]+")) { // If the entered name doesn't match regex, call an error form
-            new IncorrectFormatOfNoteErrorMessage();
-            return;
-        }
-        for (File file : notesManager.getFileList()) { // If a duplicate entry is found, call an error form
-            if (textField1.getText().equals(file.getName())) {
-                new MatchingNoteNamesErrorMessage();
-                return;
-            }
-        }
-        try {
-            notesManager.addNote(textField1.getText()); // Otherwise, actually make a new note
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        parentForm.listUpdate(); // Update the list
-        this.dispose();
+        notesManager.removeNote(selectedFile);
+        parentForm.listUpdate();
+        dispose();
     }
 
     private void onCancel() {
-        this.dispose();
-    } // and then ask the parentForm to close this form properly
+        dispose();
+    }
 }

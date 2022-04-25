@@ -54,12 +54,6 @@
           </component>
         </children>
       </grid>
-      <component id="bbd57" class="javax.swing.JLabel">
-        <constraints border-constraint="North"/>
-        <properties>
-          <text value="Заметки"/>
-        </properties>
-      </component>
       <scrollpane id="cfb9a">
         <constraints border-constraint="Center"/>
         <properties>
@@ -78,6 +72,12 @@
           </component>
         </children>
       </scrollpane>
+      <component id="1596e" class="javax.swing.JLabel">
+        <constraints border-constraint="North"/>
+        <properties>
+          <text value="Список заметок"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

@@ -11,6 +11,7 @@ public class NoteTextForm {
 
     public NoteTextForm(String fileName, NotesManager notesManager, int offsetX, int offsetY) {
         frame = new JFrame();
+        frame.setTitle("Текст заметки");
         frame.add(panel1);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(500, 500);

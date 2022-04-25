@@ -7,6 +7,7 @@ public class MatchingNoteNamesErrorMessage extends JDialog {
 
     public MatchingNoteNamesErrorMessage() {
         this.add(contentPane);
+        this.setTitle("Ошибка");
         this.setSize(500, 150);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

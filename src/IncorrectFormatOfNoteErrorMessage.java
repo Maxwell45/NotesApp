@@ -7,7 +7,8 @@ public class IncorrectFormatOfNoteErrorMessage extends JDialog {
 
     public IncorrectFormatOfNoteErrorMessage() {
         this.add(contentPane);
-        this.setSize(500, 150);
+        this.setTitle("Ошибка");
+        this.setSize(600, 150);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
