@@ -11,9 +11,9 @@ public class NoteTextForm {
     private JButton submitButton;
     private JLabel noteName;
 
-    private NotesManager notesManager;
+    private final NotesManager notesManager;
 
-    private String fileName;
+    private final String fileName;
 
     public NoteTextForm(String fileName, NotesManager notesManager, int offsetX, int offsetY) {
         frame = new JFrame();

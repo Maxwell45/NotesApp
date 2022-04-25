@@ -14,9 +14,8 @@ public class NotesListForm {
     private JButton openButton;
     private JButton deleteButton;
     private JButton newButton;
-    private NotesManager notesManager; // notesManager is being used as a way to interface with the file system.
-    private NotesListForm formReference = this; // Used as a callback to this class from another form in order to update the list
-    private JFrame noteNameDialog = new JFrame(); // and for a new note dialogue respectively
+    private final NotesManager notesManager; // notesManager is being used as a way to interface with the file system.
+    private final NotesListForm formReference = this; // Used as a callback to this class from another form in order to update the list
 
     private List<File> fileList;
     private void createUIComponents() {
