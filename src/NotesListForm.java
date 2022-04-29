@@ -65,6 +65,12 @@ public class NotesListForm {
                 createNoteDeletionConfirmationDialog(noteList.getSelectedValue().toString(), 0,0);
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT); // Delete button support
+
+        noteList.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                createNoteTextForm(noteList.getSelectedValue().toString(), 0, 0);
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT); // Enter button support
     }
 
     public void createNoteTextForm(String selectedFile, int offsetX, int offsetY) {
