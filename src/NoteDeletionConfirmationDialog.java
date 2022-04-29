@@ -15,7 +15,7 @@ public class NoteDeletionConfirmationDialog extends JDialog {
         this.add(contentPane);
         this.setTitle("Удаление заметки");
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.setSize(400, 150);
+        this.setSize(600, 150);
         this.setLocationRelativeTo(null);
         this.setLocation(this.getX() + offsetX, this.getY() + offsetY);
         this.warning.setText("Вы уверены что вы хотите удалить заметку " + selectedFile + "?"); // Asking the user if they really want to proceed with the deletion
